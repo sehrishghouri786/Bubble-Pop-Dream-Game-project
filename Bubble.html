@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Bubble Pop Dream</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #3498db;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.bubble {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.bubble:hover {
+    transform: scale(1.2);
+}
+    </style>
+</head>
+<body>
+    <div class="game-container" id="gameContainer"></div>
+    <script src="script.js"></script>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const gameContainer = document.getElementById("gameContainer");
+
+    function createBubble() {
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.style.top = `${Math.random() * 360}px`;
+        bubble.style.left = `${Math.random() * 360}px`;
+        bubble.addEventListener("click", popBubble);
+        gameContainer.appendChild(bubble);
+    }
+
+    function popBubble(event) {
+        const bubble = event.currentTarget;
+        bubble.remove();
+        createBubble();
+    }
+
+    function spawnBubbles() {
+        setInterval(createBubble, 1000); // Spawn a new bubble every second
+    }
+
+    spawnBubbles(); // Start the game by spawning the first bubble
+});
+</script>
+</html>
